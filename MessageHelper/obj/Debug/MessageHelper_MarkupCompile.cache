@@ -1,7 +1,7 @@
 ﻿MessageHelper
 
 
-winexe
+exe
 C#
 .cs
 C:\c#\MessageHelper\MessageHelper\obj\Debug\
@@ -11,9 +11,9 @@ false
 DEBUG;TRACE
 C:\c#\MessageHelper\MessageHelper\App.xaml
 11151548125
-
-5-727070320
-131775245794
+1-1575529357
+61574841718
+14-647481487
 MainWindow.xaml;
 
 False

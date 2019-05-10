@@ -1,7 +1,9 @@
-﻿using System;
-using System.Data;
-using System.Data.OleDb;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
+using log4net;
+using MessageHelper.data.message;
 
 namespace MessageHelper
 {
@@ -10,55 +12,50 @@ namespace MessageHelper
     /// </summary>
     public partial class MainWindow
     {
+        private static readonly ILog Log =
+            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+
+        public List<Message> MessageList { get; set; } = new List<Message>();
+
+        /*
+         * VARIABLES
+         */
+
+
+        /*
+         * CONSTRUCTORS
+         */
         public MainWindow()
         {
+            //log4net.Config.XmlConfigurator.Configure();
+            Log.Info("Startup");
+
             InitializeComponent();
+
+            MessagesDataGrid.ItemsSource = MessageList;
         }
 
+        /*
+         * PRIVATE METHODS
+         */
         private void ImportTiaPortalMessages_OnClick(object sender, RoutedEventArgs e)
         {
-
-            ImportTiaPortalMessages importTiaPortalMessages = new ImportTiaPortalMessages();
-            Boolean result = importTiaPortalMessages.Start();
-
-            if (result)
-            {
-                MessageBox.Show("Import");
-            }
-            else
-            {
-                MessageBox.Show("Cancel!");
-            }
-
-
-
-/*
-            DataTable sheet1 = new DataTable();
-            OleDbConnectionStringBuilder csbuilder = new OleDbConnectionStringBuilder();
-            csbuilder.Provider = "Microsoft.ACE.OLEDB.12.0";
-            csbuilder.DataSource = @"C:\c#\MessageHelper\LSR-Fehlertexte_FT2_CHA1200904.xlsx";
-            csbuilder.Add("Extended Properties", "Excel 12.0 Xml;HDR=YES");
             
-            using (OleDbConnection connection = new OleDbConnection(csbuilder.ConnectionString))
-            {
-                connection.Open();
-                string selectSql = @"SELECT * FROM [Sheet1$]";
-                MessageBox.Show(selectSql);
-                using (OleDbDataAdapter adapter = new OleDbDataAdapter(selectSql, connection))
-                {
-                    adapter.Fill(sheet1);
-                    
-                    
-                    //dataGridView1.DataSource = sheet1;
-                }
-                connection.Close();
-            }
-*/
         }
 
         private void ImportS7ClassicMessage_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            var importS7ClassicMessages = new ImportS7ClassicMessages {Messages = MessageList};
+            var result = importS7ClassicMessages.Start();
+
+            if (result)
+            {
+                MessagesDataGrid.ItemsSource = null;
+                MessagesDataGrid.ItemsSource = MessageList;
+            }
+
+            Status.Text = importS7ClassicMessages.StatusText;
         }
     }
 }

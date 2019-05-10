@@ -6,8 +6,18 @@
         xmlns:local="clr-namespace:MessageHelper"
         mc:Ignorable="d"
         Title="Message Helper #" Height="350" Width="525">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- MENU BAR -->
+        <Menu Grid.Row="0" IsMainMenu="True">
             <MenuItem Header="_Project">
                 <MenuItem Header="_New Project" />
                 <MenuItem Header="_Edit Project" />
@@ -30,6 +40,34 @@
                 <MenuItem Header="_Exit" />
             </MenuItem>
         </Menu>
-        <TextBox AcceptsReturn="True" />
-    </DockPanel>
+
+        <ToolBar Grid.Row="1">
+            <Button Content="Foo" />
+            <Button Content="Bar" />
+        </ToolBar>
+
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TreeView />
+            <GridSplitter  Width="5"/>
+            <DataGrid Grid.Column="1"
+                      Name="MessagesDataGrid"
+                      CanUserAddRows="False" />
+
+        </Grid>
+
+
+        <!-- STATUS BAR -->
+        <StatusBar Grid.Row="3">
+            <StatusBarItem>
+                <TextBlock Name="Status" />
+            </StatusBarItem>
+        </StatusBar>
+
+    </Grid>
 </Window>

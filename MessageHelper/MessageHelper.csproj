@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{7381BA3D-E34E-4EF5-80B3-A0FCE911BDAF}</ProjectGuid>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <RootNamespace>MessageHelper</RootNamespace>
         <AssemblyName>MessageHelper</AssemblyName>
         <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -42,6 +42,10 @@
           <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
           <Private>True</Private>
         </Reference>
+        <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
+          <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="Sharp7, Version=1.0.25.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\packages\Sharp7.1.0.25\lib\net40\Sharp7.dll</HintPath>
           <Private>True</Private>
@@ -71,7 +75,8 @@
             <DependentUpon>App.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Include="ImportTiaPortalMessages.cs" />
+        <Compile Include="data\message\Message.cs" />
+        <Compile Include="ImportS7ClassicMessages.cs" />
         <Compile Include="MainWindow.xaml.cs">
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
@@ -94,6 +99,11 @@
     <ItemGroup>
         <None Include="App.config" />
         <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="log4net.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
