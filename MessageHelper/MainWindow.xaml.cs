@@ -33,7 +33,10 @@ namespace MessageHelper
             InitializeComponent();
 
             MessageList = MessageDao.GetMessages();
-            MessagesDataGrid.ItemsSource = MessageList;
+            var messageSet = MessageDao2.GetMessages();
+
+            //MessagesDataGrid.ItemsSource = MessageList;
+            MessagesDataGrid.ItemsSource = messageSet.Tables[0].DefaultView;
         }
 
         /*
