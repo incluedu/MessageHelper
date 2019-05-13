@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 using System.Windows;
 using log4net;
@@ -11,11 +12,12 @@ namespace MessageHelper
     /// </summary>
     public partial class MainWindow
     {
-        private static readonly ILog Log =
-            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        public List<Message> MessageList { get; set; } = new List<Message>();
+        private DataSet messageDataSet;
+
+        private List<Message> MessageList { get; set; } = new List<Message>();
 
         /*
          * VARIABLES
@@ -27,16 +29,12 @@ namespace MessageHelper
          */
         public MainWindow()
         {
-            //log4net.Config.XmlConfigurator.Configure();
             Log.Info("Startup");
 
             InitializeComponent();
 
-            MessageList = MessageDao.GetMessages();
-            var messageSet = MessageDao2.GetMessages();
-
-            //MessagesDataGrid.ItemsSource = MessageList;
-            MessagesDataGrid.ItemsSource = messageSet.Tables[0].DefaultView;
+            messageDataSet = MessageDao2.GetMessages();
+            MessagesDataGrid.ItemsSource = messageDataSet.Tables[0].DefaultView;
         }
 
         /*
@@ -44,7 +42,6 @@ namespace MessageHelper
          */
         private void ImportTiaPortalMessages_OnClick(object sender, RoutedEventArgs e)
         {
-            
         }
 
         private void ImportS7ClassicMessage_OnClick(object sender, RoutedEventArgs e)
@@ -63,6 +60,7 @@ namespace MessageHelper
 
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
+            MessageDao2.UpdateMessages(messageDataSet);
             MessageDao.UpdateMessages(MessageList);
         }
     }
