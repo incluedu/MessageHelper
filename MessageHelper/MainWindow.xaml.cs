@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 using log4net;
 using MessageHelper.data.message;
 

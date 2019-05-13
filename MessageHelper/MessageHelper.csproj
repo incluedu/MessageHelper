@@ -86,9 +86,9 @@
             <DependentUpon>App.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Include="data\message\ImportS7ClassicMessages.cs" />
         <Compile Include="data\message\Message.cs" />
         <Compile Include="data\message\MessageDao.cs" />
-        <Compile Include="ImportS7ClassicMessages.cs" />
         <Compile Include="MainWindow.xaml.cs">
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
