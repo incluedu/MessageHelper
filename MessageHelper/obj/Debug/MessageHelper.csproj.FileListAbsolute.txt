@@ -26,3 +26,8 @@ C:\c#\MessageHelper\MessageHelper\obj\Debug\MessageHelper.csproj.CoreCompileInpu
 C:\c#\MessageHelper\MessageHelper\obj\Debug\MessageHelper.csproj.CopyComplete
 C:\c#\MessageHelper\MessageHelper\obj\Debug\MessageHelper.exe
 C:\c#\MessageHelper\MessageHelper\obj\Debug\MessageHelper.pdb
+C:\c#\MessageHelper\MessageHelper\bin\Debug\Dapper.dll
+C:\c#\MessageHelper\MessageHelper\bin\Debug\System.Data.SQLite.dll
+C:\c#\MessageHelper\MessageHelper\bin\Debug\Dapper.xml
+C:\c#\MessageHelper\MessageHelper\bin\Debug\System.Data.SQLite.xml
+C:\c#\MessageHelper\MessageHelper\bin\Debug\System.Data.SQLite.dll.config
