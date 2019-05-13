@@ -32,6 +32,7 @@ namespace MessageHelper
 
             InitializeComponent();
 
+            MessageList = MessageDao.GetMessages();
             MessagesDataGrid.ItemsSource = MessageList;
         }
 
@@ -55,6 +56,11 @@ namespace MessageHelper
             }
 
             Status.Text = importS7ClassicMessages.StatusText;
+        }
+
+        private void Save_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageDao.UpdateMessages(MessageList);
         }
     }
 }

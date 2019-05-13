@@ -31,3 +31,4 @@ C:\c#\MessageHelper\MessageHelper\bin\Debug\System.Data.SQLite.dll
 C:\c#\MessageHelper\MessageHelper\bin\Debug\Dapper.xml
 C:\c#\MessageHelper\MessageHelper\bin\Debug\System.Data.SQLite.xml
 C:\c#\MessageHelper\MessageHelper\bin\Debug\System.Data.SQLite.dll.config
+C:\c#\MessageHelper\MessageHelper\bin\Debug\messagehelper.db
