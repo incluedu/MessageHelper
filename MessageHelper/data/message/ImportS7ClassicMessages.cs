@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using ExcelDataReader;
@@ -30,6 +31,7 @@ namespace MessageHelper
         public int CounterAdd { get; private set; }
         public List<Message> Messages { get; set; } = new List<Message>();
 
+        public DataTable MessageDataTable { get; set; }
 
         /*
          * VARIABLES
@@ -92,7 +94,7 @@ namespace MessageHelper
                         UseHeaderRow = true
                     }
                 });
-                
+
                 stream.Close();
             }
 
@@ -143,6 +145,33 @@ namespace MessageHelper
         /// <param name="message">Message to add</param>
         private void UpdateMessage(Message message)
         {
+            foreach (DataRow row in MessageDataTable.Rows)
+            {
+                if (message.MessageNumber.Equals(row["messageNumber"]))
+                {
+                    row["position"] = message.Position;
+                    row["messageText"] = message.MessageText;
+                    CounterUpdate++;
+                    return;
+                }
+            }
+
+            CounterAdd++;
+
+            var dataRow = MessageDataTable.NewRow();
+            dataRow["id"] = message.Id;
+            dataRow["testDone"] = message.TestDone;
+            dataRow["testDoneTime"] = message.TestDoneTime;
+            dataRow["position"] = message.Position;
+            dataRow["messageText"] = message.MessageText;
+            dataRow["comment"] = message.Comment;
+            dataRow["messageNumber"] = message.MessageNumber;
+            dataRow["projectId"] = message.ProjectId;
+
+            MessageDataTable.Rows.Add(dataRow);
+
+            // todo remove after test
+/*
             foreach (var msg in Messages)
             {
                 if (message.MessageNumber.Equals(msg.MessageNumber))
@@ -156,6 +185,7 @@ namespace MessageHelper
 
             CounterAdd++;
             Messages.Add(message);
+*/
         }
 
 

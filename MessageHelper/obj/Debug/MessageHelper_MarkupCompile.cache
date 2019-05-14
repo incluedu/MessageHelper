@@ -4,16 +4,16 @@
 exe
 C#
 .cs
-C:\c#\MessageHelper\MessageHelper\obj\Debug\
+D:\c#\c#Projects\MessageHelper\MessageHelper\obj\Debug\
 MessageHelper
 none
 false
 DEBUG;TRACE
-C:\c#\MessageHelper\MessageHelper\App.xaml
+D:\c#\c#Projects\MessageHelper\MessageHelper\App.xaml
 11151548125
 2-1992939346
-7566379341
-19354254486
+8-547944568
+19209783748
 MainWindow.xaml;
 
 False
