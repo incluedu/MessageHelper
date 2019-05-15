@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
@@ -49,10 +50,52 @@ namespace MessageHelper.data.message
 
                     var dataTable = dataSet.Tables[0];
                     var command = connection.CreateCommand();
-                    command.CommandText = "SELECT * FROM Message";
-                    var adapter = new SQLiteDataAdapter(command);
-                    new SQLiteCommandBuilder(adapter);
-                    adapter.Update(dataTable);
+//                    command.CommandText = "SELECT * FROM Message";
+//                    var adapter = new SQLiteDataAdapter(command);
+//                    new SQLiteCommandBuilder(adapter);
+//                    adapter.Update(dataTable);
+
+
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            Log.Debug("id:= " + row["id"]);
+                            long id = (long) row["id"];
+                            if (id == 0)
+                            {
+                                command.CommandText =
+                                    $"insert into Message (testDone, testDoneTime, position, messageText, comment, " +
+                                    $"messageNumber, projectId) values (" +
+                                    $"'{row["testDone"]}', " +
+                                    $"'{row["testDoneTime"]}', " +
+                                    $"'{row["position"]}', " +
+                                    $"'{row["messageText"]}', " +
+                                    $"'{row["comment"]}', " +
+                                    $"'{row["messageNumber"]}', " +
+                                    $"'{row["projectId"]}'" +
+                                    $");";
+                            }
+                            else
+                            {
+                                command.CommandText =
+                                    $"update Message set " +
+                                    $"testDone = '{row["testDone"]}', " +
+                                    $"testDoneTime = '{row["testDoneTime"]}', " +
+                                    $"position = '{row["position"]}', " +
+                                    $"messageText = '{row["messageText"]}', " +
+                                    $"comment = '{row["comment"]}', " +
+                                    $"messageNumber = '{row["messageNumber"]}', " +
+                                    $"projectId = '{row["projectId"]}' " +
+                                    $"where id = {row["id"]};";
+                            }
+
+                            command.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                    }
+
 
                     connection.Close();
                 }
