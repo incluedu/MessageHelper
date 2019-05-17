@@ -60,7 +60,6 @@ namespace MessageHelper.data.message
                     {
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            Log.Debug("id:= " + row["id"]);
                             long id = (long) row["id"];
                             if (id == 0)
                             {
@@ -88,6 +87,8 @@ namespace MessageHelper.data.message
                                     $"messageNumber = '{row["messageNumber"]}', " +
                                     $"projectId = '{row["projectId"]}' " +
                                     $"where id = {row["id"]};";
+
+                                Log.Debug("CommandText := " + command.CommandText);
                             }
 
                             command.ExecuteNonQuery();
