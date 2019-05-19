@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 using System.Windows;
@@ -58,9 +59,9 @@ namespace MessageHelper
             MessagesDataGrid.Columns[8].Visibility = Visibility.Visible;
             
             MessagesDataGrid.Columns[5].Width = 220;
-//            MessagesDataGrid.Columns[1].DisplayIndex = 4;
-//            MessagesDataGrid.Columns[6].DisplayIndex = 1;
-//            MessagesDataGrid.Columns[8].DisplayIndex = 0;
+            MessagesDataGrid.Columns[1].DisplayIndex = 4;
+            MessagesDataGrid.Columns[6].DisplayIndex = 1;
+            MessagesDataGrid.Columns[8].DisplayIndex = 0;
 
             MessagesDataGrid.Columns[0].IsReadOnly = true;
             MessagesDataGrid.Columns[1].IsReadOnly = false;
@@ -105,7 +106,6 @@ namespace MessageHelper
             if (result)
             {
                 MessagesDataGrid.ItemsSource = null;
-                // MessagesDataGrid.ItemsSource = MessageList;
                 MessagesDataGrid.ItemsSource = MessageDataTable.DefaultView;
             }
 
@@ -114,9 +114,14 @@ namespace MessageHelper
 
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
+            MessagesDataGrid.CommitEdit(DataGridEditingUnit.Row, true);
             MessageDao2.UpdateMessages(messageDataSet);
             //MessageDao.UpdateMessages(MessageList);
         }
 
+        private void MessagesDataGrid_OnCurrentCellChanged(object sender, EventArgs e)
+        {
+           Log.Debug("Cell changed:= " + sender);
+        }
     }
 }

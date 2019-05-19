@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         Loaded="MainWindow_OnLoaded"
         Title="Message Helper #" Height="800" Width="1200">
-
+    <Window.Resources>
+        <local:ValueToBrushConverter x:Key="ValueToBrushConverter" />
+        <Style x:Key="CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background"
+                    Value="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ValueToBrushConverter}}" />
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -24,7 +30,7 @@
                 <MenuItem Header="_Edit Project" />
                 <MenuItem Header="_Project List" />
                 <Separator />
-                <MenuItem Header="_Save" Click="Save_OnClick"/>
+                <MenuItem Header="_Save" Click="Save_OnClick" />
                 <Separator />
                 <MenuItem Header="_Import/Export">
                     <MenuItem Header="_Import Project" />
@@ -55,10 +61,11 @@
             </Grid.ColumnDefinitions>
 
             <TreeView />
-            <GridSplitter  Width="5"/>
+            <GridSplitter Width="5" />
             <DataGrid Grid.Column="1"
                       Name="MessagesDataGrid"
-                      CanUserAddRows="False" />
+                      CanUserAddRows="False" 
+                      CellStyle="{StaticResource CellStyle}"/>
 
         </Grid>
 
